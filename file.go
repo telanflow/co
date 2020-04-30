@@ -1,4 +1,4 @@
-package file
+package co
 
 import (
 	"bufio"
@@ -9,7 +9,7 @@ import (
 )
 
 // 文件是否存在
-func FileExists(path string) bool {
+func PathExists(path string) bool {
 	_, err := os.Stat(path)
 	if err == nil {
 		return true
@@ -32,7 +32,7 @@ func DeleteFile(dir string) error {
 
 // 获取目录所有文件夹
 func GetPathDirs(dir string) (re []string) {
-	if FileExists(dir) {
+	if PathExists(dir) {
 		files, _ := ioutil.ReadDir(dir)
 		for _, f := range files {
 			if f.IsDir() {
@@ -45,7 +45,7 @@ func GetPathDirs(dir string) (re []string) {
 
 // 获取目录所有文件
 func GetPathFiles(dir string) (re []string) {
-	if FileExists(dir) {
+	if PathExists(dir) {
 		files, _ := ioutil.ReadDir(dir)
 		for _, f := range files {
 			if !f.IsDir() {

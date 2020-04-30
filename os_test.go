@@ -1,6 +1,8 @@
-package os
+package co
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestIsWin(t *testing.T) {
 	is := IsWin()
@@ -17,12 +19,6 @@ func TestIsMac(t *testing.T) {
 	t.Log(is)
 }
 
-func TestGetCurrentDirectory(t *testing.T) {
-	path := GetCurrentDirectory()
-	t.Log(path)
-}
-
-func TestPwd(t *testing.T) {
-	path := Pwd()
-	t.Log(path)
+func TestGetCwd(t *testing.T) {
+	t.Log(GetCwd())
 }

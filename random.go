@@ -1,4 +1,4 @@
-package random
+package co
 
 import (
 	"math/rand"
@@ -26,9 +26,9 @@ func RandInt64(min, max int64) int64 {
 // 生成随机字符串
 func RandStr(length int) string {
 	var (
-		bytes = []byte(payloadRandStr)
+		bytes  = []byte(payloadRandStr)
 		result = make([]byte, 0)
-		total = len(bytes)
+		total  = len(bytes)
 	)
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 	for i := 0; i < length; i++ {

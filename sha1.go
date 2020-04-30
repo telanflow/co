@@ -1,4 +1,4 @@
-package hash
+package co
 
 import (
 	"crypto/sha1"
@@ -8,7 +8,7 @@ import (
 	"hash"
 )
 
-// Sha1 计算字符串的sha1散列值
+// 计算字符串的sha1散列值
 func Sha1Str(s string) string {
 	data := []byte(s)
 	m := sha1.New()
@@ -16,13 +16,13 @@ func Sha1Str(s string) string {
 	return hex.EncodeToString(m.Sum(nil))
 }
 
-// ShaX 计算字符串的 shaX 散列值
-// x为1/256/512 .
-func ShaX(str string, x uint16) string {
+// 计算字符串的 shaX 散列值
+// x为1/256/512
+func ShaXStr(str string, x uint16) string {
 	return string(shaXStr([]byte(str), x))
 }
 
-// shaXStr 计算字符串的 shaX 散列值
+// 计算字符串的 shaX 散列值
 // x为1/256/512
 func shaXStr(str []byte, x uint16) []byte {
 	var h hash.Hash
@@ -38,7 +38,6 @@ func shaXStr(str []byte, x uint16) []byte {
 	}
 
 	h.Write(str)
-
 	hBytes := h.Sum(nil)
 	res := make([]byte, hex.EncodedLen(len(hBytes)))
 	hex.Encode(res, hBytes)

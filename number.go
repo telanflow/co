@@ -1,4 +1,4 @@
-package convert
+package co
 
 import (
 	"encoding/binary"
@@ -11,7 +11,7 @@ import (
 	"strconv"
 )
 
-// Int2Str 将整数转换为字符串.
+// 将整数转换为字符串
 func Int2Str(val interface{}) string {
 	switch val.(type) {
 	// Integers
@@ -23,7 +23,7 @@ func Int2Str(val interface{}) string {
 	}
 }
 
-// Float2Str 将浮点数转换为字符串,decimal为小数位数.
+// 将浮点数转换为字符串,decimal为小数位数
 func Float2Str(val interface{}, decimal int) string {
 	switch val.(type) {
 	// Floats
@@ -37,7 +37,7 @@ func Float2Str(val interface{}, decimal int) string {
 	}
 }
 
-// Bool2Str 将布尔值转换为字符串.
+// 将布尔值转换为字符串
 func Bool2Str(val bool) string {
 	if val {
 		return "true"
@@ -45,7 +45,7 @@ func Bool2Str(val bool) string {
 	return "false"
 }
 
-// Bool2Int 将布尔值转换为整型.
+// Bool2Int 将布尔值转换为整型
 func Bool2Int(val bool) int {
 	if val {
 		return 1
@@ -53,12 +53,12 @@ func Bool2Int(val bool) int {
 	return 0
 }
 
-// Dec2Bin 将十进制转换为二进制.
+// 将十进制转换为二进制
 func Dec2Bin(number int64) string {
 	return strconv.FormatInt(number, 2)
 }
 
-// Bin2Dec 将二进制转换为十进制.
+// 将二进制转换为十进制
 func Bin2Dec(str string) (int64, error) {
 	i, err := strconv.ParseInt(str, 2, 0)
 	if err != nil {
@@ -67,7 +67,7 @@ func Bin2Dec(str string) (int64, error) {
 	return i, nil
 }
 
-// Hex2Bin 将十六进制字符串转换为二进制字符串.
+// 将十六进制字符串转换为二进制字符串
 func Hex2Bin(data string) (string, error) {
 	i, err := strconv.ParseInt(data, 16, 0)
 	if err != nil {
@@ -76,7 +76,7 @@ func Hex2Bin(data string) (string, error) {
 	return strconv.FormatInt(i, 2), nil
 }
 
-// Bin2Hex 将二进制字符串转换为十六进制字符串.
+// 将二进制字符串转换为十六进制字符串
 func Bin2Hex(str string) (string, error) {
 	i, err := strconv.ParseInt(str, 2, 0)
 	if err != nil {
@@ -85,12 +85,12 @@ func Bin2Hex(str string) (string, error) {
 	return strconv.FormatInt(i, 16), nil
 }
 
-// Dec2Hex 将十进制转换为十六进制.
+// 将十进制转换为十六进制
 func Dec2Hex(number int64) string {
 	return strconv.FormatInt(number, 16)
 }
 
-// Hex2Dec 将十六进制转换为十进制.
+// 将十六进制转换为十进制
 func Hex2Dec(str string) (int64, error) {
 	start := 0
 	if len(str) > 2 && str[0:2] == "0x" {
@@ -101,12 +101,12 @@ func Hex2Dec(str string) (int64, error) {
 	return strconv.ParseInt(str[start:], 16, 0)
 }
 
-// Dec2Oct 将十进制转换为八进制.
+// 将十进制转换为八进制
 func Dec2Oct(number int64) string {
 	return strconv.FormatInt(number, 8)
 }
 
-// Oct2Dec 将八进制转换为十进制.
+// 将八进制转换为十进制
 func Oct2Dec(str string) (int64, error) {
 	start := 0
 	if len(str) > 1 && str[0:1] == "0" {
@@ -116,8 +116,8 @@ func Oct2Dec(str string) (int64, error) {
 	return strconv.ParseInt(str[start:], 8, 0)
 }
 
-// BaseConvert 进制转换,在任意进制之间转换数字.
-// number为输入数值,frombase为原进制,tobase为结果进制.
+//进制转换,在任意进制之间转换数字.
+// number为输入数值,frombase为原进制,tobase为结果进制
 func BaseConvert(number string, frombase, tobase int) (string, error) {
 	i, err := strconv.ParseInt(number, frombase, 0)
 	if err != nil {
@@ -126,7 +126,7 @@ func BaseConvert(number string, frombase, tobase int) (string, error) {
 	return strconv.FormatInt(i, tobase), nil
 }
 
-// Ip2Long 将 IPV4 的字符串互联网协议转换成长整型数字.
+// 将 IPV4 的字符串互联网协议转换成长整型数字
 func Ip2Long(ipAddress string) uint32 {
 	ip := net.ParseIP(ipAddress)
 	if ip == nil {
@@ -135,7 +135,7 @@ func Ip2Long(ipAddress string) uint32 {
 	return binary.BigEndian.Uint32(ip.To4())
 }
 
-// Long2Ip 将长整型转化为字符串形式带点的互联网标准格式地址(IPV4).
+// 将长整型转化为字符串形式带点的互联网标准格式地址(IPV4)
 func Long2Ip(properAddress uint32) string {
 	ipByte := make([]byte, 4)
 	binary.BigEndian.PutUint32(ipByte, properAddress)
@@ -143,12 +143,12 @@ func Long2Ip(properAddress uint32) string {
 	return ip.String()
 }
 
-// Gettype 获取变量类型.
+// 获取变量类型
 func Gettype(v interface{}) string {
 	return fmt.Sprintf("%T", v)
 }
 
-// ToStr 强制将变量转换为字符串.
+// 强制将变量转换为字符串
 func ToStr(val interface{}) string {
 	//先处理其他类型
 	v := reflect.ValueOf(val)
@@ -184,7 +184,7 @@ func ToStr(val interface{}) string {
 	return fmt.Sprintf("%v", val)
 }
 
-// ToBool 强制将变量转换为布尔值.
+// 强制将变量转换为布尔值
 func ToBool(val interface{}) bool {
 	switch val.(type) {
 	case int:
@@ -222,7 +222,7 @@ func ToBool(val interface{}) bool {
 	}
 }
 
-// ToInt 强制将变量转换为整型;其中true或"true"为1.
+// 强制将变量转换为整型;其中true或"true"为1
 func ToInt(val interface{}) int {
 	switch val.(type) {
 	case int:
@@ -260,7 +260,7 @@ func ToInt(val interface{}) int {
 	}
 }
 
-// ToFloat 强制将变量转换为浮点型;其中true或"true"为1.0 .
+// 强制将变量转换为浮点型;其中true或"true"为1.0
 func ToFloat(val interface{}) (res float64) {
 	switch val.(type) {
 	case int:
@@ -300,7 +300,7 @@ func ToFloat(val interface{}) (res float64) {
 	return
 }
 
-// Float64ToByte 64位浮点数转字节切片.
+// 64位浮点数转字节切片
 func Float64ToByte(val float64) []byte {
 	bits := math.Float64bits(val)
 	res := make([]byte, 8)
@@ -309,21 +309,21 @@ func Float64ToByte(val float64) []byte {
 	return res
 }
 
-// Int64ToByte 64位整型转字节切片.
+// 64位整型转字节切片
 func Int64ToByte(val int64) []byte {
 	res := make([]byte, 8)
 	binary.BigEndian.PutUint64(res, uint64(val))
 	return res
 }
 
-// Hex2Byte 16进制字符串转字节切片.
+// 16进制字符串转字节切片
 func Hex2Byte(str string) []byte {
 	h, _ := hex.DecodeString(str)
 	return h
 }
 
-// Hexs2Byte 16进制切片转byte切片.
-func Hexs2Byte(val []byte) []byte {
+// 16进制切片转byte切片
+func HexSlice2Byte(val []byte) []byte {
 	dst := make([]byte, hex.DecodedLen(len(val)))
 	_, err := hex.Decode(dst, val)
 	if err != nil {

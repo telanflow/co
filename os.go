@@ -1,38 +1,32 @@
-package os
+package co
 
 import (
 	"os"
 	"path/filepath"
 	"runtime"
-	"strings"
 )
 
-// 当前操作系统是否Windows.
+// 当前操作系统是否Windows
 func IsWin() bool {
 	return "windows" == runtime.GOOS
 }
 
-// 当前操作系统是否Linux.
+// 当前操作系统是否Linux
 func IsLinux() bool {
 	return "linux" == runtime.GOOS
 }
 
-// 当前操作系统是否Mac OS/X.
+// 当前操作系统是否Mac OS/X
 func IsMac() bool {
 	return "darwin" == runtime.GOOS
 }
 
-// 获取程序运行路径
-func GetCurrentDirectory() string {
-	dir, _ := filepath.Abs(filepath.Dir(os.Args[0]))
-	return strings.Replace(dir, "\\", "/", -1)
-}
-
-// 获取当前程序运行所在的路径,注意和Getwd有所不同.
-func Pwd() string {
+// 获取当前执行文件的真实目录
+// 不受 os.Chdir 函数影响
+func GetCwd() string {
 	var (
 		dir, ex string
-		err error
+		err     error
 	)
 	ex, err = os.Executable()
 	if err == nil {

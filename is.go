@@ -1,10 +1,8 @@
-package convert
+package co
 
-import (
-	"reflect"
-)
+import "reflect"
 
-// IsEmpty 检查变量是否为空.
+// 检查变量是否为空
 func IsEmpty(val interface{}) bool {
 	if val == nil {
 		return true
@@ -30,7 +28,7 @@ func IsEmpty(val interface{}) bool {
 	return reflect.DeepEqual(val, reflect.Zero(v.Type()).Interface())
 }
 
-// IsNil 检查变量是否空值.
+// 检查变量是否空值
 func IsNil(val interface{}) bool {
 	if val == nil {
 		return true
@@ -46,35 +44,50 @@ func IsNil(val interface{}) bool {
 	return false
 }
 
-// IsBool 是否布尔值.
+// 是否布尔值
 func IsBool(val interface{}) bool {
 	return val == true || val == false
 }
 
-// IsHex 是否十六进制字符串.
+// 是否十六进制字符串
 func IsHex(str string) bool {
 	_, err := Hex2Dec(str)
 	return err == nil
 }
 
-// IsByte 变量是否字节切片.
+// 变量是否字节切片
 func IsByte(val interface{}) bool {
 	return Gettype(val) == "[]uint8"
 }
 
-// IsStruct 变量是否结构体.
+// 变量是否结构体
 func IsStruct(val interface{}) bool {
 	r := reflectPtr(reflect.ValueOf(val))
 	return r.Kind() == reflect.Struct
 }
 
-// IsInterface 变量是否接口.
+// 变量是否接口
 func IsInterface(val interface{}) bool {
 	r := reflectPtr(reflect.ValueOf(val))
 	return r.Kind() == reflect.Invalid
 }
 
-// reflectPtr 获取反射的指向.
+// 变量是否字符串
+func IsString(val interface{}) bool {
+	return Gettype(val) == "string"
+}
+
+// 字符串是否二进制
+func IsBinary(s string) bool {
+	for _, b := range s {
+		if 0 == b {
+			return true
+		}
+	}
+	return false
+}
+
+// 获取反射的指向
 func reflectPtr(r reflect.Value) reflect.Value {
 	// 如果是指针,则获取其所指向的元素
 	if r.Kind() == reflect.Ptr {
