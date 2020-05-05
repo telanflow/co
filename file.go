@@ -5,11 +5,11 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
-	"path"
+	"path/filepath"
 )
 
 // 文件是否存在
-func PathExists(path string) bool {
+func FileExists(path string) bool {
 	_, err := os.Stat(path)
 	if err == nil {
 		return true
@@ -20,19 +20,22 @@ func PathExists(path string) bool {
 	return false
 }
 
-// 创建目录 生成多级目录
-func BuildDir(dir string) error {
-	return os.MkdirAll(path.Dir(dir), os.ModePerm)
-}
+// 给定path创建文件，如果目录不存在就递归创建
+func CreatFileNested(path string) (*os.File, error) {
+	basePath := filepath.Dir(path)
+	if !FileExists(basePath) {
+		err := os.MkdirAll(basePath, 0700)
+		if err != nil {
+			return nil, err
+		}
+	}
 
-// 删除文件或文件夹
-func DeleteFile(dir string) error {
-	return os.RemoveAll(dir)
+	return os.Create(path)
 }
 
 // 获取目录所有文件夹
 func GetPathDirs(dir string) (re []string) {
-	if PathExists(dir) {
+	if FileExists(dir) {
 		files, _ := ioutil.ReadDir(dir)
 		for _, f := range files {
 			if f.IsDir() {
@@ -45,7 +48,7 @@ func GetPathDirs(dir string) (re []string) {
 
 // 获取目录所有文件
 func GetPathFiles(dir string) (re []string) {
-	if PathExists(dir) {
+	if FileExists(dir) {
 		files, _ := ioutil.ReadDir(dir)
 		for _, f := range files {
 			if !f.IsDir() {
