@@ -45,7 +45,7 @@ func Bool2Str(val bool) string {
 	return "false"
 }
 
-// Bool2Int 将布尔值转换为整型
+// 将布尔值转换为整型
 func Bool2Int(val bool) int {
 	if val {
 		return 1
@@ -116,8 +116,8 @@ func Oct2Dec(str string) (int64, error) {
 	return strconv.ParseInt(str[start:], 8, 0)
 }
 
-//进制转换,在任意进制之间转换数字.
-// number为输入数值,frombase为原进制,tobase为结果进制
+// 进制转换,在任意进制之间转换数字
+// number为输入数值, frombase为原进制, tobase为结果进制
 func BaseConvert(number string, frombase, tobase int) (string, error) {
 	i, err := strconv.ParseInt(number, frombase, 0)
 	if err != nil {
