@@ -4,19 +4,16 @@ import (
 	"testing"
 )
 
-func TestIsWin(t *testing.T) {
-	is := IsWin()
-	t.Log(is)
+func TestIsWindows(t *testing.T) {
+	t.Log(IsWindows())
 }
 
 func TestIsLinux(t *testing.T) {
-	is := IsLinux()
-	t.Log(is)
+	t.Log(IsLinux())
 }
 
-func TestIsMac(t *testing.T) {
-	is := IsMac()
-	t.Log(is)
+func TestIsDarwin(t *testing.T) {
+	t.Log(IsDarwin())
 }
 
 func TestGetCwd(t *testing.T) {

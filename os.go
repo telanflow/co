@@ -7,7 +7,7 @@ import (
 )
 
 // 当前操作系统是否Windows
-func IsWin() bool {
+func IsWindows() bool {
 	return "windows" == runtime.GOOS
 }
 
@@ -17,7 +17,7 @@ func IsLinux() bool {
 }
 
 // 当前操作系统是否Mac OS/X
-func IsMac() bool {
+func IsDarwin() bool {
 	return "darwin" == runtime.GOOS
 }
 
