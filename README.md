@@ -1,4 +1,6 @@
 # co
+[![GoDoc](https://godoc.org/github.com/telanflow/co?status.svg)](https://godoc.org/github.com/telanflow/co)
+
 Go common libraries （Go语言公共库）
 
 # 函数列表
