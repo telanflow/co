@@ -1,19 +1,32 @@
 # co
 Go common libraries （Go语言公共库）
 
-# Func
+# 函数列表
 
 ### file.go
-```
+```text
 FileExists()        文件是否存在
-CreatFileNested()   给定path创建文件，如果目录不存在就递归创建
-GetPathDirs()       获取目录所有文件夹
-GetPathFiles()      获取目录所有文件
+FileCreateMust()    给定path创建文件，如果目录不存在就递归创建
+ReaderMimeType()    获取Reader的MimeType
+FileMimeType()      获取文件的MimeType
+GetDirs()           获取目录所有文件夹
+GetFiles()          获取目录所有文件
+GetFilesSuffix()    获取指定目录及所有子目录下的所有文件，可以匹配后缀过滤
 ReadLine()          按行读取文件
 ```
 
-### strings.go
+### path.go
+```text
+PathExists()        路径是否存在
+PathFillSlash()     给路径补全 `/`
+PathRemoveSlash()   移除路径最后的 `/`
+PathFormSlash()     将path中的反斜杠'\'替换为'/'
+IsDir()             判断路径是否为目录
+IsFile()            判断路径是否为文件
 ```
+
+### strings.go
+```text
 Str2Bytes()         将字符串转换为字节切片
 Str2Int()           将字符串转换为int
 Str2IntStrict()     严格将字符串转换为有符号整型
@@ -35,7 +48,7 @@ Runes2Bytes()       将[]rune转为[]byte
 ```
 
 ### bytes.go
-```
+```text
 Bytes2Str()         将字节切片转换为字符串
 Byte2Float64()      字节切片转64位浮点数
 Byte2Int64()        字节切片转64位整型
@@ -44,7 +57,7 @@ Byte2HexSlice()     字节切片转16进制切片
 ```
 
 ### slice.go
-```
+```text
 ContainsUint()      返回list中是否包含
 ContainsInt()       返回list中是否包含
 ContainsString()    返回list中是否包含
@@ -53,7 +66,7 @@ SliceDifference()   求两个切片差集
 ```
 
 ### number.go
-```
+```text
 Int2Str()           将整数转换为字符串
 Float2Str()         将浮点数转换为字符串,decimal为小数位数
 Bool2Str()          将布尔值转换为字符串
@@ -79,14 +92,44 @@ Hex2Byte()          16进制字符串转字节切片
 HexSlice2Byte()     16进制切片转byte切片
 ```
 
-### md5.go
+### map.go
+```text
+MergeStringMap()    合并给定的2个map
+KeyToLower()        将给定的map键名转换为小写
+Keys()              获取给定map的所有键名
+Values()            获取给定map的所有值
+GetByPath()         给定key获取value, 支持递归获取 （eg "top" "top.sub"）
 ```
+
+### md5.go
+```text
 Md5()               获取字符串md5值, length指定结果长度32/16
 Md5Str()            字符串生成md5摘要
 ```
 
 ### sha1.go
-```
+```text
 Sha1Str()           计算字符串的sha1散列值
 ShaXStr()           计算字符串的shaX散列值，x为1/256/512
+```
+
+### value.go
+```text
+IsEmpty()           检查变量是否为空
+IsNil()             检查变量是否空值
+IsBool()            是否布尔值
+IsHex()             是否十六进制字符串
+IsByte()            变量是否字节切片
+IsStruct()          变量是否结构体
+IsInterface()       变量是否接口
+IsString()          变量是否字符串
+IsBinary()          字符串是否二进制
+```
+
+### os.go
+```text
+IsWindows()         当前操作系统是否Windows
+IsLinux()           当前操作系统是否Linux
+IsDarwin()          当前操作系统是否Mac OS/X
+GetCwd()            获取当前执行文件的真实目录（不受 os.Chdir 函数影响） 
 ```
