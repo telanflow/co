@@ -18,4 +18,3 @@ func TestPathRemoveSlash(t *testing.T) {
 	asserts.Equal("/123/1236", PathRemoveSlash("/123/1236"))
 	asserts.Equal("/123/1236", PathRemoveSlash("/123/1236/"))
 }
-

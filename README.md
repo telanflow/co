@@ -45,6 +45,13 @@ Str2Float32()       将字符串转换为float32
 Str2Float64()       将字符串转换为float64
 Str2Bool()          将字符串转换为布尔值
 Runes2Bytes()       将[]rune转为[]byte
+SplitStr()          分割字符串（该方法会过滤空字符串）
+SubStr()            字符串截取
+RepeatStr()         重复字符串
+RepeatRune()        重复字符串 rune
+Padding()           字符串填充
+PadLeft()           字符串填充 - 左侧
+PadRight()          字符串填充 - 右侧
 ```
 
 ### bytes.go
@@ -131,5 +138,14 @@ IsBinary()          字符串是否二进制
 IsWindows()         当前操作系统是否Windows
 IsLinux()           当前操作系统是否Linux
 IsDarwin()          当前操作系统是否Mac OS/X
+IsMSys()            msys(MINGW64) env，不一定支持颜色
+IsConsole()         check out is in stderr/stdout/stdin
 GetCwd()            获取当前执行文件的真实目录（不受 os.Chdir 函数影响） 
+```
+
+### exec.go
+```
+QuickExec()         快速执行cli命令
+ExecCmd()           执行命令并返回输出
+ShellExec()         通过shell执行exec命令
 ```

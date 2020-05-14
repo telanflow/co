@@ -1,11 +1,18 @@
 package co
 
 import (
+	"fmt"
 	"reflect"
 	"strconv"
 	"strings"
 	"unicode/utf8"
 	"unsafe"
+)
+
+// Position for padding string
+const (
+	PosLeft uint8 = iota
+	PosRight
 )
 
 // 将字符串转换为字节切片.
@@ -159,4 +166,93 @@ func Replace(table map[string]string, s string) string {
 		s = strings.Replace(s, key, value, -1)
 	}
 	return s
+}
+
+// 分割字符串（该方法会过滤空字符串）
+func SplitStr(s, sep string) (ss []string) {
+	if s = strings.TrimSpace(s); s == "" {
+		return
+	}
+
+	for _, val := range strings.Split(s, sep) {
+		if val = strings.TrimSpace(val); val != "" {
+			ss = append(ss, val)
+		}
+	}
+	return
+}
+
+// 字符串截取
+func SubStr(s string, pos, length int) string {
+	runes := []rune(s)
+	strLen := len(runes)
+
+	// pos is to large
+	if pos >= strLen {
+		return ""
+	}
+
+	l := pos + length
+	if l > strLen {
+		l = strLen
+	}
+
+	return string(runes[pos:l])
+}
+
+// 重复字符串
+func RepeatStr(s string, times int) string {
+	if times < 2 {
+		return s
+	}
+
+	var ss []string
+	for i := 0; i < times; i++ {
+		ss = append(ss, s)
+	}
+
+	return strings.Join(ss, "")
+}
+
+// 重复字符串 rune
+func RepeatRune(char rune, times int) (chars []rune) {
+	for i := 0; i < times; i++ {
+		chars = append(chars, char)
+	}
+	return
+}
+
+// 字符串填充
+func Padding(s, pad string, length int, pos uint8) string {
+	diff := len(s) - length
+	if diff >= 0 { // do not need padding.
+		return s
+	}
+
+	if pad == "" || pad == " " {
+		mark := ""
+		if pos == PosRight { // to right
+			mark = "-"
+		}
+
+		// padding left: "%7s", padding right: "%-7s"
+		tpl := fmt.Sprintf("%s%d", mark, length)
+		return fmt.Sprintf(`%`+tpl+`s`, s)
+	}
+
+	if pos == PosRight { // to right
+		return s + RepeatStr(pad, -diff)
+	}
+
+	return RepeatStr(pad, -diff) + s
+}
+
+// 字符串填充 - 左侧
+func PadLeft(s, pad string, length int) string {
+	return Padding(s, pad, length, PosLeft)
+}
+
+// 字符串填充 - 右侧
+func PadRight(s, pad string, length int) string {
+	return Padding(s, pad, length, PosRight)
 }
