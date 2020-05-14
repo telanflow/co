@@ -1,6 +1,8 @@
 package co
 
-import "reflect"
+import (
+	"reflect"
+)
 
 // 检查变量是否为空
 func IsEmpty(val interface{}) bool {
