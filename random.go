@@ -5,8 +5,6 @@ import (
 	"time"
 )
 
-const payloadRandStr = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
 // 随机获取 min - max 之间的数值
 func RandInt(min, max int) int {
 	if min >= max || min == 0 || max == 0 {
@@ -26,7 +24,7 @@ func RandInt64(min, max int64) int64 {
 // 生成随机字符串
 func RandStr(length int) string {
 	var (
-		bytes  = []byte(payloadRandStr)
+		bytes  = []byte("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 		result = make([]byte, 0)
 		total  = len(bytes)
 	)
