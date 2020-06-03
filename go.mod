@@ -1,4 +1,4 @@
-module github/telanflow/co
+module github.com/telanflow/co
 
 go 1.14
 
