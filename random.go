@@ -3,45 +3,112 @@ package co
 import (
 	"math/rand"
 	"time"
+	"unicode"
+)
+
+var (
+	gBytes      = []byte("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+	gBytesTotal = len(gBytes)
 )
 
 // 随机获取 min - max 之间的数值
 func RandInt(min, max int) int {
-	if min >= max || min == 0 || max == 0 {
-		return max
-	}
+	rand.Seed(time.Now().UnixNano())
 	return rand.Intn(max-min) + min
+}
+
+// 随机获取 min - max 之间的数值切片
+func RandIntSlice(length, min, max int) []int {
+	list := make([]int, 0, length)
+	for {
+		LOOP:
+		if len(list) == length {
+			break
+		}
+
+		n := RandInt(min, max)
+		for _, v := range list {
+			if v == n {
+				goto LOOP
+			}
+		}
+
+		list = append(list, n)
+	}
+	return list
+}
+
+// 随机获取 min - max 之间的数值切片
+func RandInt64Slice(length int, min, max int64) []int64 {
+	list := make([]int64, 0, length)
+	for {
+	LOOP:
+		if len(list) == length {
+			break
+		}
+
+		n := RandInt64(min, max)
+		for _, v := range list {
+			if v == n {
+				goto LOOP
+			}
+		}
+
+		list = append(list, n)
+	}
+	return list
 }
 
 // 随机获取 min - max 之间的数值
 func RandInt64(min, max int64) int64 {
-	if min >= max || min == 0 || max == 0 {
-		return max
-	}
+	rand.Seed(time.Now().UnixNano())
 	return rand.Int63n(max-min) + min
 }
 
 // 生成随机字符串
 func RandStr(length int) string {
-	var (
-		bytes  = []byte("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-		result = make([]byte, 0)
-		total  = len(bytes)
-	)
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))
-	for i := 0; i < length; i++ {
-		result = append(result, bytes[r.Intn(total)])
-	}
-	return string(result)
+	return string(RandBytes(length))
 }
 
-// 返回随机字符串
-func RandStringRunes(n int) string {
-	var letterRunes = []rune("1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+// 生成随机字节切片
+func RandBytes(length int) []byte {
+	b := make([]byte, length)
+	rand.Seed(time.Now().UnixNano())
+	for i := 0; i < length; i++ {
+		b[i] = gBytes[rand.Intn(gBytesTotal)]
+	}
+	return b
+}
 
-	b := make([]rune, n)
-	for i := range b {
-		b[i] = letterRunes[rand.Intn(len(letterRunes))]
+// 生成随机字符串
+func RandStrForBytes(length int, payload []byte) string {
+	var (
+		total = len(payload)
+		b     = make([]byte, length)
+	)
+	rand.Seed(time.Now().UnixNano())
+	for i := 0; i < length; i++ {
+		b[i] = payload[rand.Intn(total)]
 	}
 	return string(b)
+}
+
+// 字符串随机转大写
+func RandStrToUpper(str string, upperSize int) string {
+	var (
+		runes = []rune(str)
+		total = len(runes)
+	)
+
+	if upperSize > total {
+		upperSize = total
+	}
+
+	rand.Seed(time.Now().UnixNano())
+	indexList := RandIntSlice(upperSize, 0, total-1)
+	for i := 0; i < upperSize; i++ {
+		index := indexList[i]
+		runes[index] = unicode.ToUpper(runes[index])
+	}
+	return string(runes)
 }
