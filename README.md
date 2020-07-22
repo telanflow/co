@@ -167,5 +167,5 @@ RandStrToUpper()    字符串随机字符转大写
 
 ### mist.go [薄雾算法](https://github.com/asyncins/mist)
 ```text
-MistGenerate()      薄雾算法是全局唯一ID生成算法
+MistGenerate()      生成全局唯一ID
 ```
