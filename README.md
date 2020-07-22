@@ -146,8 +146,26 @@ GetCwd()            获取当前执行文件的真实目录（不受 os.Chdir �
 ```
 
 ### exec.go
-```
+```text
 QuickExec()         快速执行cli命令
 ExecCmd()           执行命令并返回输出
 ShellExec()         通过shell执行exec命令
+```
+
+### random.go
+```text
+RandInt()           随机获取 min - max 之间的数值
+RandInt64()         随机获取 min - max 之间的数值
+RandIntSlice()      随机获取 min - max 之间的数值切片
+RandInt64Slice()    随机获取 min - max 之间的数值切片
+RandStr()           生成随机字符串
+RandBytes()         生成随机字节切片
+RandStrForBytes()   生成随机字符串
+RandStrToLower()    字符串随机字符转小写
+RandStrToUpper()    字符串随机字符转大写
+```
+
+### mist.go [薄雾算法](https://github.com/asyncins/mist)
+```text
+MistGenerate()      薄雾算法是全局唯一ID生成算法
 ```

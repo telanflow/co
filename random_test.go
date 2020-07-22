@@ -68,3 +68,9 @@ func TestRandInt(t *testing.T) {
 	asserts := assert.New(t)
 	asserts.NotEqual(n, n1)
 }
+
+func BenchmarkRandInt(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		RandInt(0, 100)
+	}
+}

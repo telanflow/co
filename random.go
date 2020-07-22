@@ -21,7 +21,7 @@ func RandInt(min, max int) int {
 func RandIntSlice(length, min, max int) []int {
 	list := make([]int, 0, length)
 	for {
-		LOOP:
+	LOOP:
 		if len(list) == length {
 			break
 		}
@@ -109,6 +109,26 @@ func RandStrToUpper(str string, upperSize int) string {
 	for i := 0; i < upperSize; i++ {
 		index := indexList[i]
 		runes[index] = unicode.ToUpper(runes[index])
+	}
+	return string(runes)
+}
+
+// 字符串随机转小写
+func RandStrToLower(str string, lowerSize int) string {
+	var (
+		runes = []rune(str)
+		total = len(runes)
+	)
+
+	if lowerSize > total {
+		lowerSize = total
+	}
+
+	rand.Seed(time.Now().UnixNano())
+	indexList := RandIntSlice(lowerSize, 0, total-1)
+	for i := 0; i < lowerSize; i++ {
+		index := indexList[i]
+		runes[index] = unicode.ToLower(runes[index])
 	}
 	return string(runes)
 }
