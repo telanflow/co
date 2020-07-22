@@ -132,3 +132,29 @@ func RandStrToLower(str string, lowerSize int) string {
 	}
 	return string(runes)
 }
+
+// 指定字符索引转大写
+func RandStrToUpperWithIndex(str string, indexList ...int) string {
+	var (
+		runes = []rune(str)
+		total = len(indexList)
+	)
+	for i := 0; i < total; i++ {
+		index := indexList[i]
+		runes[index] = unicode.ToUpper(runes[index])
+	}
+	return string(runes)
+}
+
+// 指定字符索引转小写
+func RandStrToLowerWithIndex(str string, indexList ...int) string {
+	var (
+		runes = []rune(str)
+		total = len(indexList)
+	)
+	for i := 0; i < total; i++ {
+		index := indexList[i]
+		runes[index] = unicode.ToLower(runes[index])
+	}
+	return string(runes)
+}

@@ -74,3 +74,19 @@ func BenchmarkRandInt(b *testing.B) {
 		RandInt(0, 100)
 	}
 }
+
+func TestRandStrToUpperWithIndex(t *testing.T) {
+	str := RandStrToUpperWithIndex("abcdefghijklmnopqrstuvwxyz", 1, 5, 10)
+	asserts := assert.New(t)
+	asserts.Equal(int32(str[1]), 'B')
+	asserts.Equal(int32(str[5]), 'F')
+	asserts.Equal(int32(str[10]), 'K')
+}
+
+func TestRandStrToLowerWithIndex(t *testing.T) {
+	str := RandStrToLowerWithIndex("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 1, 5, 10)
+	asserts := assert.New(t)
+	asserts.Equal(int32(str[1]), 'b')
+	asserts.Equal(int32(str[5]), 'f')
+	asserts.Equal(int32(str[10]), 'k')
+}
