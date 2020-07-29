@@ -13,6 +13,9 @@ var (
 
 // 随机获取 min - max 之间的数值
 func RandInt(min, max int) int {
+	if min == max {
+		return max
+	}
 	rand.Seed(time.Now().UnixNano())
 	return rand.Intn(max-min) + min
 }
@@ -25,14 +28,12 @@ func RandIntSlice(length, min, max int) []int {
 		if len(list) == length {
 			break
 		}
-
 		n := RandInt(min, max)
 		for _, v := range list {
 			if v == n {
 				goto LOOP
 			}
 		}
-
 		list = append(list, n)
 	}
 	return list
@@ -46,14 +47,12 @@ func RandInt64Slice(length int, min, max int64) []int64 {
 		if len(list) == length {
 			break
 		}
-
 		n := RandInt64(min, max)
 		for _, v := range list {
 			if v == n {
 				goto LOOP
 			}
 		}
-
 		list = append(list, n)
 	}
 	return list
@@ -61,6 +60,9 @@ func RandInt64Slice(length int, min, max int64) []int64 {
 
 // 随机获取 min - max 之间的数值
 func RandInt64(min, max int64) int64 {
+	if min == max {
+		return max
+	}
 	rand.Seed(time.Now().UnixNano())
 	return rand.Int63n(max-min) + min
 }
@@ -99,7 +101,6 @@ func RandStrToUpper(str string, upperSize int) string {
 		runes = []rune(str)
 		total = len(runes)
 	)
-
 	if upperSize > total {
 		upperSize = total
 	}
@@ -119,7 +120,6 @@ func RandStrToLower(str string, lowerSize int) string {
 		runes = []rune(str)
 		total = len(runes)
 	)
-
 	if lowerSize > total {
 		lowerSize = total
 	}
